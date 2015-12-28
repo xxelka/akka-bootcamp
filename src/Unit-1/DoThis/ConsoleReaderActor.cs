@@ -11,7 +11,7 @@ namespace WinTail
     {
         public const string ExitCommand = "exit";
         private IActorRef _consoleWriterActor;
-
+        //test
         public ConsoleReaderActor(IActorRef consoleWriterActor)
         {
             _consoleWriterActor = consoleWriterActor;

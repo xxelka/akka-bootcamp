@@ -9,14 +9,10 @@ namespace WinTail
     /// </summary>
     class ConsoleReaderActor : UntypedActor
     {
+        // ConsoleReaderActor.cs
+        // note: we don't even need our own constructor anymore!
         public const string StartCommand = "start";
         public const string ExitCommand = "exit";
-        private readonly IActorRef _validationActor;
-
-        public ConsoleReaderActor(IActorRef validationActor)
-        {
-            _validationActor = validationActor;
-        }
 
         protected override void OnReceive(object message)
         {
@@ -50,8 +46,8 @@ namespace WinTail
                 return;
             }
 
-            // otherwise, just hand message off to validation actor (by telling its actor ref)
-            _validationActor.Tell(message);
+            // otherwise, just send the message off for validation
+            Context.ActorSelection("akka://MyActorSystem/user/validationActor").Tell(message);
         }
         #endregion
     }
